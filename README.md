@@ -1,15 +1,15 @@
-# bbop-graph
+# minerva-requests
 
 ## Overview
 
-General purpose (mathematical) graph library in JavaScript.
+JavaScript library for generating request information for interactions with a Minerva server.
 
 ### Availability
 
-[GitHub](https://github.com/berkeleybop/bbop-graph)
+[GitHub](https://github.com/berkeleybop/minerva-requests)
 
-[NPM](https://www.npmjs.com/package/bbop-graph)
+[NPM](https://www.npmjs.com/package/minerva-requests)
 
 ## API
 
-[index](https://berkeleybop.github.io/bbop-graph/doc/index.html)
+[index](https://berkeleybop.github.io/minerva-requests/doc/index.html)
