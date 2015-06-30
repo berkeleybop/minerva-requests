@@ -23,7 +23,7 @@ describe('our testing environment is sane', function(){
     });
 
     // Can I pull in things as expected from node_modules, etc.?
-    it('I can see bbop-graph from my porch', function(){
+    it('I can see monarch-requests from my porch', function(){
 	var model = require('..');
 	assert.typeOf(model, 'object');
     });
