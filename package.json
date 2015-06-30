@@ -1,8 +1,8 @@
 {
-    "name": "bbop-graph",
-    "version": "0.0.13",
+    "name": "minerva-requests",
+    "version": "0.0.1",
     "license": "BSD-3-Clause",
-    "description": "General purpose (mathematical) graph library in JavaScript.",
+    "description": "JavaScript library for generating request information for interactions with a Minerva server.",
     "keywords": [
         "node",
         "npm",
@@ -12,15 +12,14 @@
         "GO",
         "bbop",
         "Berkeley BOP",
-        "math",
-        "mathematics",
-        "graph"
+        "Minerva",
+        "Noctua"
     ],
     "author": "SJC <sjcarbon@lbl.gov> (http://berkeleybop.org/)",
     "homepage": "http://berkeleybop.org/",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/berkeleybop/bbop-graph.git"
+        "url": "git+https://github.com/berkeleybop/minerva-requests.git"
     },
     "engines": {
         "node": ">= 0.12.2",
@@ -52,9 +51,9 @@
         "lib": "lib",
         "tests": "tests"
     },
-    "main": "lib/graph.js",
+    "main": "lib/requests.js",
     "bugs": {
-        "url": "https://github.com/berkeleybop/bbop-graph/issues"
+        "url": "https://github.com/berkeleybop/minerva-requests/issues"
     },
     "scripts": {
         "update-docs": "git checkout gh-pages && git pull && git merge master && gulp doc && git commit -a -m 'bump docs' && git push && git checkout master",
