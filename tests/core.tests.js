@@ -266,6 +266,7 @@ describe('annotations behave as expected', function(){
 	var mod = 'mid:123';
 	var key = 'k';
 	var value = 'v';
+	var value_num = 3;
 	var sub = 'GO:123';
 	var ob = 'GO:456';
 	var pred = 'ECO:001';
@@ -279,8 +280,8 @@ describe('annotations behave as expected', function(){
 	reqs.add_annotation_to_model(key, value);
 	reqs.remove_annotation_from_model(key, value);
 	
-	reqs.add_annotation_to_individual(key, value, sub);
-	reqs.remove_annotation_from_individual(key, value, sub);
+	reqs.add_annotation_to_individual(key, value_num, sub);
+	reqs.remove_annotation_from_individual(key, value_num, sub);
 	
 	reqs.add_annotation_to_fact(key, value, [sub, ob, pred]);
 	reqs.remove_annotation_from_fact(key, value, [sub, ob, pred]);
@@ -325,7 +326,7 @@ describe('annotations behave as expected', function(){
 		     "values": [
 			 {
 			     "key": "k",
-			     "value": "v"
+			     "value": "3"
 			 }
 		     ],
 		     "model-id": "mid:123"
@@ -341,7 +342,7 @@ describe('annotations behave as expected', function(){
 		     "values": [
 			 {
 			     "key": "k",
-			     "value": "v"
+			     "value": "3"
 			 }
 		     ],
 		     "model-id": "mid:123"
