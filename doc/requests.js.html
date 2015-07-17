@@ -79,6 +79,8 @@ var request_variable = function(varvalue){
     /**
      * The value of the variable to be used.
      *
+     * @name value
+     * @function
      * @returns {String} string
      */
     anchor.value = _value;
@@ -87,6 +89,8 @@ var request_variable = function(varvalue){
      * Returns true or false on whether or not the user changed the
      * value of the setting.
      *
+     * @name set_p
+     * @function
      * @returns {Boolean} boolean
      */
     anchor.set_p = function(){
@@ -182,6 +186,8 @@ var request = function(entity, operation){
      * requests, this may be required. See table:
      * https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .
      *
+     * @name special
+     * @function
      * @param {String} name - string
      * @param {String} val - string
      * @returns {String} added value
@@ -196,6 +202,8 @@ var request = function(entity, operation){
      * Return a higher-level representation/&quot;serialization&quot; of the
      * complete object.
      *
+     * @name objectify
+     * @function
      * @returns {Object} simple object
      */
     anchor.objectify = function(){
@@ -221,6 +229,8 @@ var request = function(entity, operation){
      * Get/set the instance of this request. If not set explicitly,
      * will fall back to a default value.
      *
+     * @name individual
+     * @function
      * @param {String} [ind_id] - individual id we&#x27;re going to refer to
      * @returns {String} string
      */
@@ -249,6 +259,8 @@ var request = function(entity, operation){
      * Get/set the object of this request. This will be used in
      * fact/edge requests, but not much else.
      *
+     * @name object
+     * @function
      * @param {String} [obj] - a string
      * @returns {String|null} string or null
      */
@@ -260,6 +272,8 @@ var request = function(entity, operation){
      * Get/set the predicate of this request. This will be used in
      * fact/edge requests, but not much else.
      *
+     * @name predicate
+     * @function
      * @param {String} [pred] - a string
      * @returns {String|null} string or null
      */
@@ -274,6 +288,8 @@ var request = function(entity, operation){
      * not-yet-created model, Minerva will often add this itself if it
      * can after the fact.
      *
+     * @name model
+     * @function
      * @param {String} [model] - a string id
      * @returns {String|null} string or null
      */
@@ -285,6 +301,8 @@ var request = function(entity, operation){
      * Add a fact to the request. The same as adding subject, object,
      * and predicate all separately.
      *
+     * @name fact
+     * @function
      * @param {String} sub - string
      * @param {String} obj - string
      * @param {String} pred - string
@@ -301,6 +319,8 @@ var request = function(entity, operation){
      * Add an annotation pair (or series of pairs) to the request.
      * All annotations should be converted into strings for upstream consumption.
      *
+     * @name add_annotation
+     * @function
      * @param {String} key - string
      * @param {String} vals - string or list of strings
      * @returns {Number} number of annotations
@@ -331,6 +351,8 @@ var request = function(entity, operation){
     /**
      * Return list of annotations in request.
      *
+     * @name annotations
+     * @function
      * @returns {Array} (actual) list of request &quot;values&quot; pairs
      */
     anchor.annotations = function(){
@@ -340,6 +362,8 @@ var request = function(entity, operation){
     /**
      * General use for whatever.
      *
+     * @name class_expression
+     * @function
      * @param {class_expression|String} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @param {String} property_id - string
      * @returns {Number} number of expressions
@@ -361,6 +385,8 @@ var request = function(entity, operation){
      * A short form for &quot;addition&quot; requests that can overload the
      * literal (on the server side) with Manchester syntax.
      *
+     * @name add_svf_expression
+     * @function
      * @param {class_expression|String} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @param {String} property_id - string (id or...something more complicated?)
      * @returns {Number} number of expressions
@@ -379,6 +405,8 @@ var request = function(entity, operation){
     /**
      * Intersections and unions.
      *
+     * @name add_set_class_expression
+     * @function
      * @param {String} type - &#x27;intersection&#x27; or &#x27;union&#x27;
      * @param {Array} class_expr_list - a list of anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @returns {Number} number of expressions
@@ -397,6 +425,8 @@ var request = function(entity, operation){
     /**
      * Return list of expressions in request.
      *
+     * @name expressions
+     * @function
      * @returns {Array} (actual) list of request &quot;expressions&quot;.
      */
     anchor.expressions = function(){
@@ -448,6 +478,8 @@ var request_set = function(user_token, model_id){
      * (implicitly or explicitly).
      * 
      * @see request_set#last_fact_triple
+     * @name last_individual_id
+     * @function
      * @param {Number} [number_to_skip] - number of matches to skip (default: 0)
      * @returns {String|null} string or null
      */
@@ -479,6 +511,8 @@ var request_set = function(user_token, model_id){
      * This methods return a list of the three string or null.
      * 
      * @see request_set#last_individual_id
+     * @name last_triple_fact
+     * @function
      * @param {Number} [number_to_skip] - number of matches to skip (default: 0)
      * @returns {Array|null} list of three strings or null
      */
@@ -510,6 +544,8 @@ var request_set = function(user_token, model_id){
      * of adding things to the request queue and should only be used
      * when other methods (look at the API) are not available.
      * 
+     * @name add
+     * @function
      * @param {request} req - &amp;lt;request&gt;
      * @param {intention} [intention] - &#x27;action&#x27; or &#x27;query&#x27; (&#x27;action&#x27; default)
      * @returns {request_set} current request set, modified; suitable for chaining 
@@ -539,6 +575,8 @@ var request_set = function(user_token, model_id){
      * 
      * Expect: &quot;success&quot; and &quot;merge&quot;.
      * 
+     * @name add_individual
+     * @function
      * @param {class_expression} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @param {String} [model_id] - string
      * @returns {String} id of individual added, as string
@@ -567,6 +605,8 @@ var request_set = function(user_token, model_id){
      * 
      * Expect: &quot;success&quot; and &quot;rebuild&quot;.
      * 
+     * @name remove_individual
+     * @function
      * @param {String} individual_id - string
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
@@ -616,6 +656,8 @@ var request_set = function(user_token, model_id){
      * logicially treated as an &quot;intersection&quot;, but not processed and
      * displayed as such.
      * 
+     * @name add_type_to_individual
+     * @function
      * @param {class_expression} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @param {String} individual_id - string
      * @param {String} [model_id] - string
@@ -630,6 +672,8 @@ var request_set = function(user_token, model_id){
     /**
      * Remove the identified type from the individual.
      * 
+     * @name remove_type_from_individual
+     * @function
      * @param {class_expression} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
      * @param {String} individual_id - string
      * @param {String} [model_id] - string
@@ -657,6 +701,8 @@ var request_set = function(user_token, model_id){
      *
      * Expect: &quot;success&quot; and &quot;merge&quot;.
      * 
+     * @name add_fact
+     * @function
      * @param {Array} triple - list of three strings: [SUBJECT_ID, OBJECT_ID, PREDICATE_ID]
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
@@ -680,6 +726,8 @@ var request_set = function(user_token, model_id){
      *
      * Expect: &quot;success&quot; and &quot;rebuild&quot;.
      * 
+     * @name remove_fact
+     * @function
      * @param {Array} triple - list of three strings: [SUBJECT_ID, OBJECT_ID, PREDICATE_ID]
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
@@ -701,6 +749,8 @@ var request_set = function(user_token, model_id){
      * Adds &quot;anonymous&quot; evidence individual that is referenced in the
      * individual&#x27;s or fact&#x27;s annotations to the batch.
      * 
+     * @name add_evidence
+     * @function
      * @param {String} evidence_id - string
      * @param {String} source_ids - string or list of strings (i.e. PMIDs)
      * @param {String} target_identifier - string (individual_id) or list of 3 strings (fact)
@@ -769,6 +819,8 @@ var request_set = function(user_token, model_id){
      * made by evidence creation--clean-up will be taken care of by
      * Minerva.
      * 
+     * @name remove_evidence
+     * @function
      * @param {String} evidence_individual_id - string
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
@@ -791,6 +843,8 @@ var request_set = function(user_token, model_id){
      * 
      * *[WARNING: Should only be used once, probably not at all!]*
      * 
+     * @name add_evidence_to_last_individual
+     * @function
      * @param {String} evidence_id - string
      * @param {String} source_ids - null, string, or list of strings (PMIDs, etc.)
      * @param {String} [model_id] - string
@@ -813,6 +867,8 @@ var request_set = function(user_token, model_id){
      * 
      * *[WARNING: Should only be used once, probably not at all!]*
      * 
+     * @name add_evidence_to_last_fact
+     * @function
      * @param {String} evidence_id - string
      * @param {String} source_ids - null, string, or list of strings (PMIDs, etc.)
      * @param {String} [model_id] - string
@@ -875,6 +931,8 @@ var request_set = function(user_token, model_id){
     /**
      * Adds unique key/value set to model.
      * 
+     * @name add_annotation_to_model
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} [model_id] - string
@@ -889,6 +947,8 @@ var request_set = function(user_token, model_id){
     /**
      * Adds unique key/value set to model.
      * 
+     * @name remove_annotation_from_model
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} [model_id] - string
@@ -903,6 +963,8 @@ var request_set = function(user_token, model_id){
     /**
      * Adds unique key/value set to an individual.
      * 
+     * @name add_annotation_to_individual
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} individual_id - string
@@ -919,6 +981,8 @@ var request_set = function(user_token, model_id){
     /**
      * Removes unique key/value set from an individual.
      * 
+     * @name remove_annotation_from_individual
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} individual_id - string
@@ -935,6 +999,8 @@ var request_set = function(user_token, model_id){
     /**
      * Adds unique key/value set to a fact.
      * 
+     * @name add_annotation_to_fact
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} triple - list of three strings: [SUBJECT_ID, OBJECT_ID, PREDICATE_ID]
@@ -951,6 +1017,8 @@ var request_set = function(user_token, model_id){
     /**
      * Removes unique key/value set from a fact.
      * 
+     * @name remove_annotation_from_fact
+     * @function
      * @param {String} key - string
      * @param {String} value - string
      * @param {String} triple - list of three strings: [SUBJECT_ID, OBJECT_ID, PREDICATE_ID]
@@ -967,6 +1035,8 @@ var request_set = function(user_token, model_id){
     /**
      * Undo the last batch of operations performed on the model.
      * 
+     * @name undo_last_model_batch
+     * @function
      * @param {String} [model_id] - string
      * @returns {request_set} 
      */
@@ -983,6 +1053,8 @@ var request_set = function(user_token, model_id){
     /**
      * Redo the last batch of operations performed on the model.
      * 
+     * @name redo_last_model_batch
+     * @function
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
      */
@@ -999,6 +1071,8 @@ var request_set = function(user_token, model_id){
     /**
      * Essentially, get the list of relations.
      * 
+     * @name get_meta
+     * @function
      * @returns {request_set} current request set, modified; suitable for chaining
      */
     anchor.get_meta = function(){
@@ -1016,6 +1090,8 @@ var request_set = function(user_token, model_id){
      * 
      * This *[CANNOT]* be used with any other request.
      * 
+     * @name get_model
+     * @function
      * @param {String} model_id - string
      * @returns {request_set} current request set, modified; suitable for chaining
      */
@@ -1035,6 +1111,8 @@ var request_set = function(user_token, model_id){
      * 
      * This *[CANNOT]* be used with any other request.
      * 
+     * @name get_undo_redo
+     * @function
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
      */
@@ -1056,6 +1134,8 @@ var request_set = function(user_token, model_id){
      *  class-id - *[optional]* string; an initial class to build around
      *  taxon-id - *[optional]* string; the background species
      * 
+     * @name add_model
+     * @function
      * @param {Object} argument_hash - string (see above for properties)
      * @returns {request_set} current request set, modified; suitable for chaining
      */
@@ -1087,6 +1167,8 @@ var request_set = function(user_token, model_id){
      * Store the model to the model store (file on disk as of this
      * writing, but may change soon).
      * 
+     * @name store_model
+     * @function
      * @param {String} [model_id] - string
      * @returns {request_set} current request set, modified; suitable for chaining
      */
@@ -1106,6 +1188,8 @@ var request_set = function(user_token, model_id){
      * Create the JSON object that will be passed to the Minerva
      * server.
      * 
+     * @name structure
+     * @function
      * @returns {Object} final object of all queued requests
      */
     anchor.structure = function(){
@@ -1133,6 +1217,8 @@ var request_set = function(user_token, model_id){
     /**
      * Serialize a request set and the component requests.
      * 
+     * @name callable
+     * @function
      * @returns {Object} serialization of all queued requests
      */
     anchor.callable = function(){
