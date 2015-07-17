@@ -30,6 +30,68 @@
             </dl>
           </header>
           <section id="summary">
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Methods</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-minerva-requests-request.html#add_annotation">add_annotation(key, vals)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#add_set_class_expression">add_set_class_expression(type, class_expr_list)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#add_svf_expression">add_svf_expression(class_expr, property_id)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#annotations">annotations()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#class_expression">class_expression(class_expr, property_id)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-minerva-requests-request.html#entity">entity()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#expressions">expressions()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#fact">fact(sub, obj, pred)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#individual">individual([ind_id])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#model">model([model])</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-minerva-requests-request.html#object">object([obj])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#objectify">objectify()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#predicate">predicate([pred])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#special">special(name, val)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-minerva-requests-request.html#subject">subject([sub])</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
           </section>
           <section>
             <h2 id="request">new&nbsp;<span class="symbol-name">request</span><span class="signature"><span class="signature-params">(entity, operation)</span></span></h2>
@@ -81,11 +143,557 @@
             <dl class="dl-compact">
               <dt>Returns</dt>
               <dd>
-                <p><code><a href="request.html">request</a></code>&nbsp;request object</p>
+                <p><code>request</code>&nbsp;request object</p>
               </dd>
             </dl>
           </section>
           <section>
+            <h2>Methods</h2>
+            <section>
+              <h3 id="add_annotation"><span class="symbol-name">add_annotation</span><span class="signature"><span class="signature-params">(key, vals)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
+              <p>Add an annotation pair (or series of pairs) to the request. All annotations should be converted into strings for upstream consumption.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>key</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>vals</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string or list of strings</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Number</code>&nbsp;number of annotations</p>
+                </dd>
+              </dl>
+              <h3 id="add_set_class_expression"><span class="symbol-name">add_set_class_expression</span><span class="signature"><span class="signature-params">(type, class_expr_list)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
+              <p>Intersections and unions.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>type</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>'intersection' or 'union'</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>class_expr_list</p>
+                      </td>
+                      <td>
+                        <p>Array</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>a list of anything that can be taken by
+                          <class_expression> constructor</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Number</code>&nbsp;number of expressions</p>
+                </dd>
+              </dl>
+              <h3 id="add_svf_expression"><span class="symbol-name">add_svf_expression</span><span class="signature"><span class="signature-params">(class_expr, property_id)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
+              <p>Function: add_svf_expression</p>
+              <p>Special use. A short form for &quot;addition&quot; requests that can overload the literal (on the server side) with Manchester syntax.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>class_expr</p>
+                      </td>
+                      <td>
+                        <p>(class_expression or String)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>anything that can be taken by
+                          <class_expression> constructor</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>property_id</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string (id or...something more complicated?)</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Number</code>&nbsp;number of expressions</p>
+                </dd>
+              </dl>
+              <h3 id="annotations"><span class="symbol-name">annotations</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Array</span></span></h3>
+              <p>Return list of annotations in request.</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array</code>&nbsp;(actual) list of request &quot;values&quot; pairs</p>
+                </dd>
+              </dl>
+              <h3 id="class_expression"><span class="symbol-name">class_expression</span><span class="signature"><span class="signature-params">(class_expr, property_id)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
+              <p>General use for whatever.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>class_expr</p>
+                      </td>
+                      <td>
+                        <p>(class_expression or String)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>anything that can be taken by
+                          <class_expression> constructor</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>property_id</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Number</code>&nbsp;number of expressions</p>
+                </dd>
+              </dl>
+              <h3 id="entity"><span class="symbol-name">entity</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
+              <p>The specified entity string.</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(String or null)</code>&nbsp;string or null</p>
+                </dd>
+              </dl>
+              <h3 id="expressions"><span class="symbol-name">expressions</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Array</span></span></h3>
+              <p>Return list of expressions in request.</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array</code>&nbsp;(actual) list of request &quot;expressions&quot;.</p>
+                </dd>
+              </dl>
+              <h3 id="fact"><span class="symbol-name">fact</span><span class="signature"><span class="signature-params">(sub, obj, pred)</span></span></h3>
+              <p>Add a fact to the request. The same as adding subject, object, and predicate all separately.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>sub</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>obj</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>pred</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p>n/a</p>
+                </dd>
+              </dl>
+              <h3 id="individual"><span class="symbol-name">individual</span><span class="signature"><span class="signature-params">([ind_id])</span>&nbsp;&rarr; <span class="signature-returns"> String</span></span></h3>
+              <p>Get/set the instance of this request. If not set explicitly, will fall back to a default value.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>ind_id</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>individual id we're going to refer to</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>String</code>&nbsp;string</p>
+                </dd>
+              </dl>
+              <h3 id="model"><span class="symbol-name">model</span><span class="signature"><span class="signature-params">([model])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
+              <p>Get/set the topic model of this request.</p>
+              <p>If a model is not set, like during requests in a set to a not-yet-created model, Minerva will often add this itself if it can after the fact.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>model</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a string id</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(String or null)</code>&nbsp;string or null</p>
+                </dd>
+              </dl>
+              <h3 id="object"><span class="symbol-name">object</span><span class="signature"><span class="signature-params">([obj])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
+              <p>Get/set the object of this request. This will be used in fact/edge requests, but not much else.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>obj</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(String or null)</code>&nbsp;string or null</p>
+                </dd>
+              </dl>
+              <h3 id="objectify"><span class="symbol-name">objectify</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Object</span></span></h3>
+              <p>Should only be used in the context of making a request set.</p>
+              <p>Return a higher-level representation/&quot;serialization&quot; of the complete object.</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Object</code>&nbsp;simple object</p>
+                </dd>
+              </dl>
+              <h3 id="predicate"><span class="symbol-name">predicate</span><span class="signature"><span class="signature-params">([pred])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
+              <p>Get/set the predicate of this request. This will be used in fact/edge requests, but not much else.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>pred</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(String or null)</code>&nbsp;string or null</p>
+                </dd>
+              </dl>
+              <h3 id="special"><span class="symbol-name">special</span><span class="signature"><span class="signature-params">(name, val)</span>&nbsp;&rarr; <span class="signature-returns"> String</span></span></h3>
+              <p>Add a &quot;special&quot; variable to the request. For a subset of requests, this may be required. See table: https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>name</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>val</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>String</code>&nbsp;added value</p>
+                </dd>
+              </dl>
+              <h3 id="subject"><span class="symbol-name">subject</span><span class="signature"><span class="signature-params">([sub])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
+              <p>Get/set the subject of this request.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>sub</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(String or null)</code>&nbsp;string or null</p>
+                </dd>
+              </dl>
+            </section>
           </section>
         </div>
       </div>
@@ -95,7 +703,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.3.2 on July 16, 2015.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.3.2 on July 17, 2015.
       </p>
     </div>
   </footer>
