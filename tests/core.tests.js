@@ -145,7 +145,7 @@ describe('request_set behaves as intended', function(){
 	var st1 = reqs1.structure();
 
 	var reqs2 = new request_set('utoken');
-	reqs2.add_individual('GO:123', 'mid:123');
+	reqs2.add_individual('GO:123', null, 'mid:123');
 	var st2 = reqs1.structure();
 	
 	assert.equal('mid:123',
@@ -619,5 +619,26 @@ describe('look at a full assembly', function(){
 	// act enabled_by gp.
 	reqs.add_fact([mf, gp, 'occurs_in']);
 
+    });
+});
+
+describe('request_set, individuals, and "request-iri"', function(){
+
+    it('play around with setting the individual "id"', function(){
+	
+	var fake_iri = 'iri:foo';
+
+	var reqs1 = new request_set('utoken', 'mid:123');
+	var cap = reqs1.add_individual(null, fake_iri);
+	assert.equal(cap, fake_iri, 'iri passed back for reference');
+	//console.log('reqs1', reqs1.structure().requests[0]);
+
+	// looking back
+	assert.equal(reqs1.last_individual_id(), fake_iri,
+		     'correctly find in stack');
+
+	var reqs2 = new request_set('utoken', 'mid:123');
+	reqs2.add_individual('GO:123');
+	//console.log('reqs2', reqs2.structure().requests[0]);
     });
 });
