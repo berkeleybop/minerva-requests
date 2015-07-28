@@ -4,7 +4,7 @@
 
 var chai = require('chai');
 chai.config.includeStack = true;
-assert = chai.assert;
+var assert = chai.assert;
 var class_expression = require('class-expression');
 var minerva_requests = require('..');
 var request_variable = minerva_requests.request_variable;
