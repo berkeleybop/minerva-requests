@@ -128,7 +128,7 @@ var request = function(entity, operation){
 
     // Tons of ops require individuals, and they need to be implicitly
     // passable.
-    anchor._individual_id = new request_variable();
+    anchor._individual_id = new request_variable();    
 
     // Hold most other additional arguments to the request.
     // TODO: Could use some checking here? Maybe per-entity?
@@ -224,7 +224,7 @@ var request = function(entity, operation){
 
 	// If we&#x27;re using an implicitly set individual id, make sure
 	// that is added to the call.
-	if( anchor._entity == &#x27;individual&#x27; &amp;amp;&amp;amp; ! anchor._individual_id.set_p() ){
+	if( anchor._entity === &#x27;individual&#x27; &amp;amp;&amp;amp; ! anchor._individual_id.set_p() ){
 	    base[&#x27;arguments&#x27;][&#x27;assign-to-variable&#x27;] =
 		anchor._individual_id.value();
 	}
@@ -344,10 +344,10 @@ var request = function(entity, operation){
     anchor.add_annotation = function(key, vals){
 
 	// Convert val to a list if necessary.
-	if( what_is(vals) == &#x27;string&#x27; || what_is(vals) == &#x27;number&#x27; ){
+	if( what_is(vals) === &#x27;string&#x27; || what_is(vals) === &#x27;number&#x27; ){
 	    vals = [vals];
 	}
-	if( what_is(vals) != &#x27;array&#x27; ){ throw new Error(&#x27;unknown argument&#x27;); }
+	if( what_is(vals) !== &#x27;array&#x27; ){ throw new Error(&#x27;unknown argument&#x27;); }
 
 	// Our list of values must be defined if we go this way.
 	anchor._ensure_list(&#x27;values&#x27;);
@@ -356,7 +356,7 @@ var request = function(entity, operation){
 	each(vals, function(val){
 	    // Numbers to strings.
 	    var final_val = val;
-	    if( what_is(val) == &#x27;number&#x27; ){ final_val = val.toString(); }
+	    if( what_is(val) === &#x27;number&#x27; ){ final_val = val.toString(); }
 	    // Add on.
 	    anchor._arguments[&#x27;values&#x27;].push({&#x27;key&#x27;: key, &#x27;value&#x27;: final_val});
 	});
@@ -520,7 +520,7 @@ var request_set = function(user_token, model_id){
 		    break;
 		}
 	    }
-	};
+	}
 	
 	return retval;
     };
@@ -557,7 +557,7 @@ var request_set = function(user_token, model_id){
 		    break;
 		}
 	    }
-	};
+	}
 	
 	return retval;
     };
@@ -582,9 +582,9 @@ var request_set = function(user_token, model_id){
 	// &#x27;action&#x27;.
 	if( ! intention ){
 	    anchor._intention = &#x27;action&#x27;;
-	}else if( intention == &#x27;action&#x27; ){
+	}else if( intention === &#x27;action&#x27; ){
 	    anchor._intention = intention;
-	}else if( intention == &#x27;query&#x27; ){
+	}else if( intention === &#x27;query&#x27; ){
 	    // Skip as it is at least weaker than a possibly set
 	    // &#x27;action&#x27;.
 	}
@@ -602,24 +602,33 @@ var request_set = function(user_token, model_id){
      * @alias module:minerva-requests~request_set#add_individual
      * @function
      * @memberof module:minerva-requests~request_set
-     * @param {class_expression} class_expr - anything that can be taken by &amp;lt;class_expression&gt; constructor
+     * @param {class_expression} [class_expr] - anything that can be taken by &amp;lt;class_expression&gt; constructor; technically optional, but c&#x27;mon buddy
+     * @param {String} [individual_id] - if none given, generate random one (preferred in most use cases)
      * @param {String} [model_id] - string
      * @returns {String} id of individual added, as string
      */
-    anchor.add_individual = function(class_expr, model_id){
+    anchor.add_individual = function(class_expr, individual_id, model_id){
 
 	var retval = null;
+
+	var ind_req = new request(&#x27;individual&#x27;, &#x27;add&#x27;);
+	
 	if( class_expr ){
-
-	    var ind_req = new request(&#x27;individual&#x27;, &#x27;add&#x27;);
-	    if( model_id ){ ind_req.model(model_id); } // optionally add
-
 	    ind_req.add_class_expression(class_expr);
-
-	    anchor.add(ind_req, &#x27;action&#x27;);
-
+	}
+	    
+	if( typeof(individual_id) === &#x27;string&#x27; ){ // optionally add
+	    retval = ind_req.individual(individual_id);
+	    ind_req.special(&#x27;individual-iri&#x27;, individual_id);
+	}else{ // generate id (norm)
 	    retval = ind_req.individual();
 	}
+
+	if( model_id ){ // optionally add
+	    ind_req.model(model_id);
+	}
+
+	anchor.add(ind_req, &#x27;action&#x27;);
 
 	//return anchor;
 	return retval;
@@ -658,7 +667,7 @@ var request_set = function(user_token, model_id){
 					     model_id){
 
 	if( op &amp;amp;&amp;amp; class_expr &amp;amp;&amp;amp; individual_id ){
-	    if( op != &#x27;add&#x27; &amp;amp;&amp;amp; op != &#x27;remove&#x27; ){
+	    if( op !== &#x27;add&#x27; &amp;amp;&amp;amp; op !== &#x27;remove&#x27; ){
 		throw new Error(&#x27;unknown type operation&#x27;);
 	    }else{
 		var type_req =
@@ -813,7 +822,7 @@ var request_set = function(user_token, model_id){
 	    // fact (triple).
 	    if( ! target_identifier ){
 		throw new Error(&#x27;no target identified for evidence add&#x27;);
-	    }else if( what_is(target_identifier) == &#x27;string&#x27; ){
+	    }else if( what_is(target_identifier) === &#x27;string&#x27; ){
 
 		// Tie the floating evidence to the individual
 		// with an annotation to it.
@@ -934,7 +943,7 @@ var request_set = function(user_token, model_id){
 
 	// First, decide the request.
 	var req = null;
-	if( op == &#x27;add&#x27; || op == &#x27;remove&#x27; ){
+	if( op === &#x27;add&#x27; || op === &#x27;remove&#x27; ){
 	    req = new request(target, op + &#x27;-annotation&#x27;);
 	    if( model_id ){ req.model(model_id); } // optional
 	}else{
@@ -942,11 +951,11 @@ var request_set = function(user_token, model_id){
 	}
 
 	// Add necessary arguments to identify the target.
-	if( target == &#x27;model&#x27; ){
+	if( target === &#x27;model&#x27; ){
 	    // Already done.
-	}else if( target == &#x27;individual&#x27; ){
+	}else if( target === &#x27;individual&#x27; ){
 	    req.individual(target_identifier);
-	}else if( target == &#x27;edge&#x27; ){
+	}else if( target === &#x27;edge&#x27; ){
 	    anchor._ensure_fact(target_identifier);
 	    req.fact(target_identifier[0],
 		     target_identifier[1],
@@ -1304,7 +1313,7 @@ module.exports = {
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.3.2 on July 17, 2015.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.3.2 on July 28, 2015.
       </p>
     </div>
   </footer>
