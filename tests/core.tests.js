@@ -12,6 +12,9 @@ var request = minerva_requests.request;
 var request_set = minerva_requests.request_set;
 // var rs = new request_set(); rs.add_individual("GO:123", "http://foo.com/bar"); ll(rs.structure())
 
+var model = new require('bbop-graph-noctua');
+
+
 ///
 /// Helpers.
 ///
@@ -674,4 +677,170 @@ describe('different ways of creating and referencing individuals', function(){
 	assert.isUndefined(args['individual'], 'has no id');
 	assert.isString(args['assign-to-variable'], 'has asgn');
     });
+});
+
+describe('try all the amazing uses of update_annotations', function(){
+
+    it('add model annotations', function(){
+
+	var g = new model.graph('mid:123');
+
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['green', 'blue']);
+
+	// This should have created two requests in the set.
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+
+    });
+
+    it('remove model annotations', function(){
+
+	// Three annotation model.
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	var a2 = new model.annotation({'key': 'flavor', 'value': 'blue'});
+	var a3 = new model.annotation({'key': 'smell', 'value': 'red'});
+	g.add_annotation(a1);
+	g.add_annotation(a2);
+	g.add_annotation(a3);
+
+	// Delete flavor annotations.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', []);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+	
+    });
+
+    it('update model annotations', function(){
+
+	// Three annotation model.
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	var a2 = new model.annotation({'key': 'flavor', 'value': 'blue'});
+	var a3 = new model.annotation({'key': 'smell', 'value': 'red'});
+	g.add_annotation(a1);
+	g.add_annotation(a2);
+	g.add_annotation(a3);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+	
+    });
+
 });
