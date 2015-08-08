@@ -10,6 +10,7 @@ var minerva_requests = require('..');
 var request_variable = minerva_requests.request_variable;
 var request = minerva_requests.request;
 var request_set = minerva_requests.request_set;
+// var rs = new request_set(); rs.add_individual("GO:123", "http://foo.com/bar"); ll(rs.structure())
 
 ///
 /// Helpers.
@@ -33,7 +34,7 @@ describe('simple testing for request_variable', function(){
     it('id', function(){
 	var rv = new request_variable();
 	assert.equal(rv.value().length, 36,
-	     'like 8ccbf846-d7e8-4d86-9e5c-0b48827d178d');
+		     'like 8ccbf846-d7e8-4d86-9e5c-0b48827d178d');
 	assert.isFalse(rv.set_p(), 'not set');
 	
     });
@@ -68,7 +69,8 @@ describe('requests behave as intended', function(){
 	
 	assert.equal(f_req.subject(), i1_req.individual(), 'same individual 1');
 	assert.equal(f_req.object(), i2_req.individual(), 'same individual 2');
-	assert.notEqual(f_req.subject(), f_req.object(), 'but not same individual');
+	assert.notEqual(f_req.subject(), f_req.object(),
+			'but not same individual');
     });
 
     it('a more realistic example', function(){
@@ -280,11 +282,11 @@ describe('annotations behave as expected', function(){
 	reqs.add_annotation_to_model(key, value);
 	reqs.remove_annotation_from_model(key, value);
 	
-	reqs.add_annotation_to_individual(key, value_num, sub);
-	reqs.remove_annotation_from_individual(key, value_num, sub);
+	reqs.add_annotation_to_individual(key, value_num, null, sub);
+	reqs.remove_annotation_from_individual(key, value_num, null, sub);
 	
-	reqs.add_annotation_to_fact(key, value, [sub, ob, pred]);
-	reqs.remove_annotation_from_fact(key, value, [sub, ob, pred]);
+	reqs.add_annotation_to_fact(key, value, null, [sub, ob, pred]);
+	reqs.remove_annotation_from_fact(key, value, null, [sub, ob, pred]);
 	
 	var all_requests = reqs.structure()['requests'];
 	assert.deepEqual(all_requests[0],
@@ -626,7 +628,7 @@ describe('request_set, individuals, and "request-iri"', function(){
 
     it('play around with setting the individual "id"', function(){
 	
-	var fake_iri = 'iri:foo';
+	var fake_iri = 'http://foo.com/bar';
 
 	var reqs1 = new request_set('utoken', 'mid:123');
 	var cap = reqs1.add_individual(null, fake_iri);
@@ -638,7 +640,38 @@ describe('request_set, individuals, and "request-iri"', function(){
 		     'correctly find in stack');
 
 	var reqs2 = new request_set('utoken', 'mid:123');
-	reqs2.add_individual('GO:123');
-	//console.log('reqs2', reqs2.structure().requests[0]);
+	var tmp_id = reqs2.add_individual('GO:123');
+	var args = reqs2.structure().requests[0]['arguments'];
+	//console.log('reqs2', args);
+	assert.isUndefined(args['individual-iri'], 'has no iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.equal(args['assign-to-variable'], tmp_id, 'has correct asgn');
+    });
+});
+
+describe('different ways of creating and referencing individuals', function(){
+
+    it('create a new individual with a known IRI', function(){
+
+	var rs = new request_set();
+	rs.add_individual("GO:123", "http://foo.com/bar");
+	var s = rs.structure();
+	//ll(s);
+	var args = s['requests'][0]['arguments'];
+	assert.isString(args['individual-iri'], 'has known iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.isUndefined(args['assign-to-variable'], 'has no asgn');
+    });
+
+    it('create a new individual with TBD IRI', function(){
+
+	var rs = new request_set();
+	rs.add_individual("GO:123");
+	var s = rs.structure();
+	//ll(s);
+	var args = s['requests'][0]['arguments'];
+	assert.isUndefined(args['individual-iri'], 'has no iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.isString(args['assign-to-variable'], 'has asgn');
     });
 });
