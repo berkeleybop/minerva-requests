@@ -1,6 +1,6 @@
 {
     "name": "minerva-requests",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "BSD-3-Clause",
     "description": "JavaScript library for generating request information for interactions with a Minerva server.",
     "keywords": [
@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "bbop-core": "0.0.5",
-	"bbop-graph-noctua": "0.0.18",
+        "bbop-graph-noctua": "0.0.18",
         "underscore": "1.8.3",
         "class-expression": "0.0.8"
     },
