@@ -394,7 +394,8 @@ describe('annotations behave as expected', function(){
 });
 
 describe('evidence behaves as expected', function(){
-    it('', function(){
+
+    it('non-with', function(){
 	var reqs = new request_set('utoken', 'mid:123');
 
 	// axon guidance receptor activity
@@ -407,8 +408,8 @@ describe('evidence behaves as expected', function(){
 	var triple = reqs.add_fact([mf, bp, 'part_of']);
 	
 	// Evidence.
-	reqs.add_evidence('ECO:0000001', 'PMID:0000000', mf);
-	reqs.add_evidence('ECO:0000001', ['PMID:0000000'], triple);
+	reqs.add_evidence('ECO:0000001', 'PMID:0000000', null, mf);
+	reqs.add_evidence('ECO:0000001', ['PMID:0000000'], null, triple);
 
 	// var target_request = {
 	//  "token": "utoken",
@@ -552,9 +553,34 @@ describe('evidence behaves as expected', function(){
 	assert.notEqual(all_requests[8]['arguments']['object'], null,
 	     'edge ann has obj');
 	assert.notEqual(all_requests[8]['arguments']['predicate'], null,
-	     'edge ann has pred');
+	     'edge ann has pred');	
+    });
 
+    it('with-with', function(){
+	var reqs = new request_set('utoken', 'mid:123');
+
+	// axon guidance receptor activity
+	var mf = reqs.add_individual('GO:0008046');
 	
+	// neurogenesis
+	var bp = reqs.add_individual('GO:0022008');
+	
+	// FACT!
+	var triple = reqs.add_fact([mf, bp, 'part_of']);
+	
+	// Evidence.
+	reqs.add_evidence('ECO:0000001', 'PMID:0000000', ['foo:bar'], triple);
+
+	ll(reqs);
+
+	var all_requests = reqs.structure()['requests'];
+
+	assert.equal(all_requests.length, 6, 'this takes 6 ops in total');
+	
+	assert.equal(all_requests[4]['arguments']['values'][1]['key'],
+		     'with', 'with key');
+	assert.equal(all_requests[4]['arguments']['values'][1]['value'],
+		     'foo:bar', 'with value');
     });
 });
 
