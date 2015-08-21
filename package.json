@@ -27,9 +27,9 @@
     },
     "dependencies": {
         "bbop-core": "0.0.5",
-        "bbop-graph-noctua": "0.0.18",
+        "bbop-graph-noctua": "0.0.23",
         "underscore": "1.8.3",
-        "class-expression": "0.0.8"
+        "class-expression": "0.0.9"
     },
     "devDependencies": {
         "chai": "^2.3.0",
