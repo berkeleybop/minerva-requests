@@ -869,4 +869,103 @@ describe('try all the amazing uses of update_annotations', function(){
 	
     });
 
+    it('update model annotations, but with an explicit reasoner', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	// Request reasoner.
+	reqs.use_reasoner(true);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/reasoner) as expected');
+	
+    });
+
+    it('update model annotations, but with a constructor reasoner', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123', true);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
 });
