@@ -968,4 +968,107 @@ describe('try all the amazing uses of update_annotations', function(){
 	
     });
 
+    it('update model annotations, but with a single group', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123', true, ['foo:bar']);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "provided-by": [
+		"foo:bar"
+	    ],
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
+    it('update model annotations, but with two groups', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123',
+				   null, ['foo:bar', 'bar:bib']);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "provided-by": [
+		"foo:bar",
+		"bar:bib"
+	    ],
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
 });
