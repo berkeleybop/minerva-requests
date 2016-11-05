@@ -1072,3 +1072,39 @@ describe('try all the amazing uses of update_annotations', function(){
     });
 
 });
+
+describe('look at request envelopes intended for the outside world', function(){
+
+    it('make a minimal with likely base', function(){
+
+	// 
+	var reqs = new request_set();
+	// Real.
+	reqs.token('404');
+	reqs.intention('action');
+	reqs.use_groups(['bar:bib']);
+	// Optional.
+	reqs.referring_model_id('narf');
+	// Fake.
+	reqs.user_id('http://user1');
+	reqs.client_id('super-client');
+	
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    // External only.
+	    "client-id": "super-client",
+	    "model-id": "narf",
+	    "user-id": "http://user1",
+	    // Required.
+	    "token": "404",
+	    "intention": "action",
+	    "provided-by": [
+		"bar:bib"
+	    ],
+	    "requests": []
+	}, 'structure as expected for base');
+	
+    });
+});
+
