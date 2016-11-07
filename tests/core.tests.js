@@ -117,6 +117,22 @@ describe('requests behave as intended', function(){
 	// // Call
 	// manager.DO_NOT_USE_THIS(mid);
     });
+
+    it("look at external-only request templates", function(){
+	var i1_req = new request('template');
+	i1_req.add_class_expression('GO:111');
+	
+	var i2_req = new request('individual', 'add');
+	i2_req.add_class_expression('GO:222');
+	
+	var f_req = new request('edge', 'add');
+	f_req.fact(i1_req.individual(), i2_req.individual(), 'is_a');
+	
+	assert.equal(f_req.subject(), i1_req.individual(), 'same individual 1');
+	assert.equal(f_req.object(), i2_req.individual(), 'same individual 2');
+	assert.notEqual(f_req.subject(), f_req.object(),
+			'but not same individual');
+    });
 });
 
 describe('request_set behaves as intended', function(){
@@ -1078,31 +1094,28 @@ describe('look at request envelopes intended for the outside world', function(){
     it('make a minimal with likely base', function(){
 
 	// 
-	var reqs = new request_set();
+	var reqs = new request_set('uzertokn', 'narf1234567');
 	// Real.
-	reqs.token('404');
-	reqs.intention('action');
-	reqs.use_groups(['bar:bib']);
-	// Optional.
-	reqs.referring_model_id('narf');
-	// Fake.
-	reqs.user_id('http://user1');
-	reqs.client_id('super-client');
+	reqs.use_groups(['http://foo.bar']);
+	// External-only.
+	reqs.external_model_id('narf1234567');
+	reqs.external_client_id('super-client-id');
+	reqs.external_user_id('http://user.my');
 	
 	var s = reqs.structure();
 	//ll(s);
 	assert.deepEqual(s, {
-	    // External only.
-	    "client-id": "super-client",
-	    "model-id": "narf",
-	    "user-id": "http://user1",
 	    // Required.
-	    "token": "404",
-	    "intention": "action",
+	    "token": "uzertokn",
 	    "provided-by": [
-		"bar:bib"
+		"http://foo.bar"
 	    ],
-	    "requests": []
+	    "requests": [
+	    ],
+	    // Fake, for use in template, external only.
+	    'x-model-id': "narf1234567",
+	    'x-user-id': 'http://user.my',
+	    'x-client-id':'super-client-id'
 	}, 'structure as expected for base');
 	
     });
