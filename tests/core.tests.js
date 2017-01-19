@@ -1105,6 +1105,7 @@ describe('look at request envelopes intended for the outside world', function(){
 	reqs.external_fact_source_id('fs123');
 	reqs.external_fact_target_id('ft123');
 	reqs.external_fact_relation_id('fr123');
+	reqs.external_return_url('http://noctua.bbop.org/tractorbeam');
 	
 	var s = reqs.structure();
 	//ll(s);
@@ -1123,7 +1124,8 @@ describe('look at request envelopes intended for the outside world', function(){
 	    'x-individual-id':'i123',
 	    'x-fact-source-id':'fs123',
 	    'x-fact-target-id':'ft123',
-	    'x-fact-relation-id':'fr123'
+	    'x-fact-relation-id':'fr123',
+	    'x-return-url': 'http://noctua.bbop.org/tractorbeam'
 	}, 'structure as expected for base');
 	
     });
