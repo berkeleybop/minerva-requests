@@ -1101,6 +1101,10 @@ describe('look at request envelopes intended for the outside world', function(){
 	reqs.external_model_id('narf1234567');
 	reqs.external_client_id('super-client-id');
 	reqs.external_user_id('http://user.my');
+	reqs.external_individual_id('i123');
+	reqs.external_fact_source_id('fs123');
+	reqs.external_fact_target_id('ft123');
+	reqs.external_fact_relation_id('fr123');
 	
 	var s = reqs.structure();
 	//ll(s);
@@ -1115,7 +1119,11 @@ describe('look at request envelopes intended for the outside world', function(){
 	    // Fake, for use in template, external only.
 	    'x-model-id': "narf1234567",
 	    'x-user-id': 'http://user.my',
-	    'x-client-id':'super-client-id'
+	    'x-client-id':'super-client-id',
+	    'x-individual-id':'i123',
+	    'x-fact-source-id':'fs123',
+	    'x-fact-target-id':'ft123',
+	    'x-fact-relation-id':'fr123'
 	}, 'structure as expected for base');
 	
     });
