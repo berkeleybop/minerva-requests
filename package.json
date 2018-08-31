@@ -1,6 +1,6 @@
 {
     "name": "minerva-requests",
-    "version": "0.0.15",
+    "version": "0.0.17",
     "license": "BSD-3-Clause",
     "description": "JavaScript library for generating request information for interactions with a Minerva server.",
     "keywords": [
