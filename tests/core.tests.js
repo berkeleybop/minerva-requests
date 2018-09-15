@@ -10,6 +10,10 @@ var minerva_requests = require('..');
 var request_variable = minerva_requests.request_variable;
 var request = minerva_requests.request;
 var request_set = minerva_requests.request_set;
+// var rs = new request_set(); rs.add_individual("GO:123", "http://foo.com/bar"); ll(rs.structure())
+
+var model = new require('bbop-graph-noctua');
+
 
 ///
 /// Helpers.
@@ -33,7 +37,7 @@ describe('simple testing for request_variable', function(){
     it('id', function(){
 	var rv = new request_variable();
 	assert.equal(rv.value().length, 36,
-	     'like 8ccbf846-d7e8-4d86-9e5c-0b48827d178d');
+		     'like 8ccbf846-d7e8-4d86-9e5c-0b48827d178d');
 	assert.isFalse(rv.set_p(), 'not set');
 	
     });
@@ -68,7 +72,8 @@ describe('requests behave as intended', function(){
 	
 	assert.equal(f_req.subject(), i1_req.individual(), 'same individual 1');
 	assert.equal(f_req.object(), i2_req.individual(), 'same individual 2');
-	assert.notEqual(f_req.subject(), f_req.object(), 'but not same individual');
+	assert.notEqual(f_req.subject(), f_req.object(),
+			'but not same individual');
     });
 
     it('a more realistic example', function(){
@@ -111,6 +116,22 @@ describe('requests behave as intended', function(){
 	//     });
 	// // Call
 	// manager.DO_NOT_USE_THIS(mid);
+    });
+
+    it("look at external-only request templates", function(){
+	var i1_req = new request('template');
+	i1_req.add_class_expression('GO:111');
+	
+	var i2_req = new request('individual', 'add');
+	i2_req.add_class_expression('GO:222');
+	
+	var f_req = new request('edge', 'add');
+	f_req.fact(i1_req.individual(), i2_req.individual(), 'is_a');
+	
+	assert.equal(f_req.subject(), i1_req.individual(), 'same individual 1');
+	assert.equal(f_req.object(), i2_req.individual(), 'same individual 2');
+	assert.notEqual(f_req.subject(), f_req.object(),
+			'but not same individual');
     });
 });
 
@@ -280,11 +301,11 @@ describe('annotations behave as expected', function(){
 	reqs.add_annotation_to_model(key, value);
 	reqs.remove_annotation_from_model(key, value);
 	
-	reqs.add_annotation_to_individual(key, value_num, sub);
-	reqs.remove_annotation_from_individual(key, value_num, sub);
+	reqs.add_annotation_to_individual(key, value_num, null, sub);
+	reqs.remove_annotation_from_individual(key, value_num, null, sub);
 	
-	reqs.add_annotation_to_fact(key, value, [sub, ob, pred]);
-	reqs.remove_annotation_from_fact(key, value, [sub, ob, pred]);
+	reqs.add_annotation_to_fact(key, value, null, [sub, ob, pred]);
+	reqs.remove_annotation_from_fact(key, value, null, [sub, ob, pred]);
 	
 	var all_requests = reqs.structure()['requests'];
 	assert.deepEqual(all_requests[0],
@@ -389,7 +410,8 @@ describe('annotations behave as expected', function(){
 });
 
 describe('evidence behaves as expected', function(){
-    it('', function(){
+
+    it('non-with', function(){
 	var reqs = new request_set('utoken', 'mid:123');
 
 	// axon guidance receptor activity
@@ -402,8 +424,8 @@ describe('evidence behaves as expected', function(){
 	var triple = reqs.add_fact([mf, bp, 'part_of']);
 	
 	// Evidence.
-	reqs.add_evidence('ECO:0000001', 'PMID:0000000', mf);
-	reqs.add_evidence('ECO:0000001', ['PMID:0000000'], triple);
+	reqs.add_evidence('ECO:0000001', 'PMID:0000000', null, mf);
+	reqs.add_evidence('ECO:0000001', ['PMID:0000000'], null, triple);
 
 	// var target_request = {
 	//  "token": "utoken",
@@ -547,9 +569,34 @@ describe('evidence behaves as expected', function(){
 	assert.notEqual(all_requests[8]['arguments']['object'], null,
 	     'edge ann has obj');
 	assert.notEqual(all_requests[8]['arguments']['predicate'], null,
-	     'edge ann has pred');
+	     'edge ann has pred');	
+    });
 
+    it('with-with', function(){
+	var reqs = new request_set('utoken', 'mid:123');
+
+	// axon guidance receptor activity
+	var mf = reqs.add_individual('GO:0008046');
 	
+	// neurogenesis
+	var bp = reqs.add_individual('GO:0022008');
+	
+	// FACT!
+	var triple = reqs.add_fact([mf, bp, 'part_of']);
+	
+	// Evidence.
+	reqs.add_evidence('ECO:0000001', 'PMID:0000000', ['foo:bar'], triple);
+
+	ll(reqs);
+
+	var all_requests = reqs.structure()['requests'];
+
+	assert.equal(all_requests.length, 6, 'this takes 6 ops in total');
+	
+	assert.equal(all_requests[4]['arguments']['values'][1]['key'],
+		     'with', 'with key');
+	assert.equal(all_requests[4]['arguments']['values'][1]['value'],
+		     'foo:bar', 'with value');
     });
 });
 
@@ -626,7 +673,7 @@ describe('request_set, individuals, and "request-iri"', function(){
 
     it('play around with setting the individual "id"', function(){
 	
-	var fake_iri = 'iri:foo';
+	var fake_iri = 'http://foo.com/bar';
 
 	var reqs1 = new request_set('utoken', 'mid:123');
 	var cap = reqs1.add_individual(null, fake_iri);
@@ -638,7 +685,449 @@ describe('request_set, individuals, and "request-iri"', function(){
 		     'correctly find in stack');
 
 	var reqs2 = new request_set('utoken', 'mid:123');
-	reqs2.add_individual('GO:123');
-	//console.log('reqs2', reqs2.structure().requests[0]);
+	var tmp_id = reqs2.add_individual('GO:123');
+	var args = reqs2.structure().requests[0]['arguments'];
+	//console.log('reqs2', args);
+	assert.isUndefined(args['individual-iri'], 'has no iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.equal(args['assign-to-variable'], tmp_id, 'has correct asgn');
     });
 });
+
+describe('different ways of creating and referencing individuals', function(){
+
+    it('create a new individual with a known IRI', function(){
+
+	var rs = new request_set();
+	rs.add_individual("GO:123", "http://foo.com/bar");
+	var s = rs.structure();
+	//ll(s);
+	var args = s['requests'][0]['arguments'];
+	assert.isString(args['individual-iri'], 'has known iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.isUndefined(args['assign-to-variable'], 'has no asgn');
+    });
+
+    it('create a new individual with TBD IRI', function(){
+
+	var rs = new request_set();
+	rs.add_individual("GO:123");
+	var s = rs.structure();
+	//ll(s);
+	var args = s['requests'][0]['arguments'];
+	assert.isUndefined(args['individual-iri'], 'has no iri');
+	assert.isUndefined(args['individual'], 'has no id');
+	assert.isString(args['assign-to-variable'], 'has asgn');
+    });
+});
+
+describe('try all the amazing uses of update_annotations', function(){
+
+    it('add model annotations', function(){
+
+	var g = new model.graph('mid:123');
+
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['green', 'blue']);
+
+	// This should have created two requests in the set.
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+
+    });
+
+    it('remove model annotations', function(){
+
+	// Three annotation model.
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	var a2 = new model.annotation({'key': 'flavor', 'value': 'blue'});
+	var a3 = new model.annotation({'key': 'smell', 'value': 'red'});
+	g.add_annotation(a1);
+	g.add_annotation(a2);
+	g.add_annotation(a3);
+
+	// Delete flavor annotations.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', []);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+	
+    });
+
+    it('update model annotations', function(){
+
+	// Three annotation model.
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	var a2 = new model.annotation({'key': 'flavor', 'value': 'blue'});
+	var a3 = new model.annotation({'key': 'smell', 'value': 'red'});
+	g.add_annotation(a1);
+	g.add_annotation(a2);
+	g.add_annotation(a3);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "blue"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure as expected');
+	
+    });
+
+    it('update model annotations, but with an explicit reasoner', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123');
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	// Request reasoner.
+	reqs.use_reasoner(true);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/reasoner) as expected');
+	
+    });
+
+    it('update model annotations, but with a constructor reasoner', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123', true);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
+    it('update model annotations, but with a single group', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123', true, ['foo:bar']);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "provided-by": [
+		"foo:bar"
+	    ],
+	    "use-reasoner": "true",
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
+    it('update model annotations, but with two groups', function(){
+
+	var g = new model.graph('mid:123');
+	var a1 = new model.annotation({'key': 'flavor', 'value': 'green'});
+	g.add_annotation(a1);
+
+	// Delete flavor annotations, add new flavor annotation.
+	var reqs = new request_set('utoken', 'mid:123',
+				   null, ['foo:bar', 'bar:bib']);
+	reqs.update_annotations(g, 'flavor', ['red']);
+
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    "token": "utoken",
+	    "intention": "action",
+	    "provided-by": [
+		"foo:bar",
+		"bar:bib"
+	    ],
+	    "requests": [
+		{
+		    "entity": "model",
+		    "operation": "remove-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "green"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		},
+		{
+		    "entity": "model",
+		    "operation": "add-annotation",
+		    "arguments": {
+			"values": [
+			    {
+				"key": "flavor",
+				"value": "red"
+			    }
+			],
+			"model-id": "mid:123"
+		    }
+		}
+	    ]
+	}, 'structure (w/ constructor reasoner) as expected');
+	
+    });
+
+});
+
+describe('look at request envelopes intended for the outside world', function(){
+
+    it('make a minimal with likely base', function(){
+
+	// 
+	var reqs = new request_set('uzertokn', 'narf1234567');
+	// Real.
+	reqs.use_groups(['http://foo.bar']);
+	// External-only.
+	reqs.external_model_id('narf1234567');
+	reqs.external_client_id('super-client-id');
+	reqs.external_user_id('http://user.my');
+	reqs.external_individual_id('i123');
+	reqs.external_fact_source_id('fs123');
+	reqs.external_fact_target_id('ft123');
+	reqs.external_fact_relation_id('fr123');
+	reqs.external_return_url('http://noctua.bbop.org/tractorbeam');
+	
+	var s = reqs.structure();
+	//ll(s);
+	assert.deepEqual(s, {
+	    // Required.
+	    "token": "uzertokn",
+	    "provided-by": [
+		"http://foo.bar"
+	    ],
+	    "requests": [
+	    ],
+	    // Fake, for use in template, external only.
+	    'x-model-id': "narf1234567",
+	    'x-user-id': 'http://user.my',
+	    'x-client-id':'super-client-id',
+	    'x-individual-id':'i123',
+	    'x-fact-source-id':'fs123',
+	    'x-fact-target-id':'ft123',
+	    'x-fact-relation-id':'fr123',
+	    'x-return-url': 'http://noctua.bbop.org/tractorbeam'
+	}, 'structure as expected for base');
+	
+    });
+});
+

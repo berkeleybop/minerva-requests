@@ -7,18 +7,18 @@
 var assert = require('chai').assert;
 
 describe('our testing environment is sane', function(){
-    
+
     // State.
     var thingy = null;
 
-    // Pre-run.    
+    // Pre-run.
     before(function() {
 	thingy = 1;
     });
-    
+
     // Trivially works two ways.
     it('works at all (thingy)', function(){
-	thingy.should.equal(1);
+	//thingy.should.equal(1);
         assert.equal(thingy, 1);
     });
 
@@ -27,7 +27,7 @@ describe('our testing environment is sane', function(){
 	var model = require('..');
 	assert.typeOf(model, 'object');
     });
-    
+
     // Post-run.
     after(function(){
 	thingy = null;
