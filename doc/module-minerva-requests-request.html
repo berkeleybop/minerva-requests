@@ -1,719 +1,2763 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="generator" content="JSDoc 3.3.2">
-  <meta charset="utf-8">
-  <title>Class: request</title>
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
-  <link href="css/baseline.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>JSDoc: Class: request</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
 
-<body onload="prettyPrint()">
-  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
-    <div id="jsdoc-navbar-container">
-      <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
-      </div>
-    </div>
-  </nav>
-  <div id="jsdoc-body-container">
-    <div id="jsdoc-content">
-      <div id="jsdoc-content-container">
-        <div id="jsdoc-main" role="main">
-          <header class="page-header">
-            <h1><div class="symbol-detail-labels"><span class="label label-kind">class</span>&nbsp;<span class="label label-inner">inner</span></div><small><a href="module-minerva-requests.html">minerva-requests</a>~<wbr></small><span class="symbol-name">request</span></h1>
-            <p class="source-link">Source: <a href="requests.js.html#source-line-84">requests.<wbr>js:84</a></p>
-            <dl class="dl-compact">
-            </dl>
-          </header>
-          <section id="summary">
-            <div class="summary-callout">
-              <h2 class="summary-callout-heading">Methods</h2>
-              <div class="summary-content">
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="module-minerva-requests-request.html#add_annotation">add_annotation(key, vals)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#add_set_class_expression">add_set_class_expression(type, class_expr_list)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#add_svf_expression">add_svf_expression(class_expr, property_id)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#annotations">annotations()</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#class_expression">class_expression(class_expr, property_id)</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="module-minerva-requests-request.html#entity">entity()</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#expressions">expressions()</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#fact">fact(sub, obj, pred)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#individual">individual([ind_id])</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#model">model([model])</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="module-minerva-requests-request.html#object">object([obj])</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#objectify">objectify()</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#predicate">predicate([pred])</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#special">special(name, val)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="module-minerva-requests-request.html#subject">subject([sub])</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <h2 id="request">new&nbsp;<span class="symbol-name">request</span><span class="signature"><span class="signature-params">(entity, operation)</span></span></h2>
-            <p>Contructor for a Minerva request item. See table for operation/entity combinations: https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .</p>
-            <p>Handle requests to Minerva in a somewhat structured way.</p>
-            <section>
-              <h3>Parameters</h3>
-              <table class="jsdoc-details-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Optional</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <p>entity</p>
-                    </td>
-                    <td>
-                      <p>String</p>
-                    </td>
-                    <td>
-                      <p>&nbsp;</p>
-                    </td>
-                    <td>
-                      <p>string, see table</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>operation</p>
-                    </td>
-                    <td>
-                      <p>String</p>
-                    </td>
-                    <td>
-                      <p>&nbsp;</p>
-                    </td>
-                    <td>
-                      <p>string, see table</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-            <dl class="dl-compact">
-              <dt>Returns</dt>
-              <dd>
-                <p><code>request</code>&nbsp;request object</p>
-              </dd>
-            </dl>
-          </section>
-          <section>
-            <h2>Methods</h2>
-            <section>
-              <h3 id="add_annotation"><span class="symbol-name">add_annotation</span><span class="signature"><span class="signature-params">(key, vals)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
-              <p>Add an annotation pair (or series of pairs) to the request. All annotations should be converted into strings for upstream consumption.</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>key</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>vals</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string or list of strings</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Number</code>&nbsp;number of annotations</p>
-                </dd>
-              </dl>
-              <h3 id="add_set_class_expression"><span class="symbol-name">add_set_class_expression</span><span class="signature"><span class="signature-params">(type, class_expr_list)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
-              <p>Intersections and unions.</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>type</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>'intersection' or 'union'</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>class_expr_list</p>
-                      </td>
-                      <td>
-                        <p>Array</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>a list of anything that can be taken by
-                          <class_expression> constructor</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Number</code>&nbsp;number of expressions</p>
-                </dd>
-              </dl>
-              <h3 id="add_svf_expression"><span class="symbol-name">add_svf_expression</span><span class="signature"><span class="signature-params">(class_expr, property_id)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
-              <p>Function: add_svf_expression</p>
-              <p>Special use. A short form for &quot;addition&quot; requests that can overload the literal (on the server side) with Manchester syntax.</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>class_expr</p>
-                      </td>
-                      <td>
-                        <p>(class_expression or String)</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>anything that can be taken by
-                          <class_expression> constructor</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>property_id</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string (id or...something more complicated?)</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Number</code>&nbsp;number of expressions</p>
-                </dd>
-              </dl>
-              <h3 id="annotations"><span class="symbol-name">annotations</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Array</span></span></h3>
-              <p>Return list of annotations in request.</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Array</code>&nbsp;(actual) list of request &quot;values&quot; pairs</p>
-                </dd>
-              </dl>
-              <h3 id="class_expression"><span class="symbol-name">class_expression</span><span class="signature"><span class="signature-params">(class_expr, property_id)</span>&nbsp;&rarr; <span class="signature-returns"> Number</span></span></h3>
-              <p>General use for whatever.</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>class_expr</p>
-                      </td>
-                      <td>
-                        <p>(class_expression or String)</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>anything that can be taken by
-                          <class_expression> constructor</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>property_id</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Number</code>&nbsp;number of expressions</p>
-                </dd>
-              </dl>
-              <h3 id="entity"><span class="symbol-name">entity</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
-              <p>The specified entity string.</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>(String or null)</code>&nbsp;string or null</p>
-                </dd>
-              </dl>
-              <h3 id="expressions"><span class="symbol-name">expressions</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Array</span></span></h3>
-              <p>Return list of expressions in request.</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Array</code>&nbsp;(actual) list of request &quot;expressions&quot;.</p>
-                </dd>
-              </dl>
-              <h3 id="fact"><span class="symbol-name">fact</span><span class="signature"><span class="signature-params">(sub, obj, pred)</span></span></h3>
-              <p>Add a fact to the request. The same as adding subject, object, and predicate all separately.</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>sub</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>obj</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>pred</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p>n/a</p>
-                </dd>
-              </dl>
-              <h3 id="individual"><span class="symbol-name">individual</span><span class="signature"><span class="signature-params">([ind_id])</span>&nbsp;&rarr; <span class="signature-returns"> String</span></span></h3>
-              <p>Get/set the instance of this request. If not set explicitly, will fall back to a default value.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>ind_id</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>Yes</p>
-                      </td>
-                      <td>
-                        <p>individual id we're going to refer to</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>String</code>&nbsp;string</p>
-                </dd>
-              </dl>
-              <h3 id="model"><span class="symbol-name">model</span><span class="signature"><span class="signature-params">([model])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
-              <p>Get/set the topic model of this request.</p>
-              <p>If a model is not set, like during requests in a set to a not-yet-created model, Minerva will often add this itself if it can after the fact.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>model</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>Yes</p>
-                      </td>
-                      <td>
-                        <p>a string id</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>(String or null)</code>&nbsp;string or null</p>
-                </dd>
-              </dl>
-              <h3 id="object"><span class="symbol-name">object</span><span class="signature"><span class="signature-params">([obj])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
-              <p>Get/set the object of this request. This will be used in fact/edge requests, but not much else.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>obj</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>Yes</p>
-                      </td>
-                      <td>
-                        <p>a string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>(String or null)</code>&nbsp;string or null</p>
-                </dd>
-              </dl>
-              <h3 id="objectify"><span class="symbol-name">objectify</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Object</span></span></h3>
-              <p>Should only be used in the context of making a request set.</p>
-              <p>Return a higher-level representation/&quot;serialization&quot; of the complete object.</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Object</code>&nbsp;simple object</p>
-                </dd>
-              </dl>
-              <h3 id="predicate"><span class="symbol-name">predicate</span><span class="signature"><span class="signature-params">([pred])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
-              <p>Get/set the predicate of this request. This will be used in fact/edge requests, but not much else.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>pred</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>Yes</p>
-                      </td>
-                      <td>
-                        <p>a string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>(String or null)</code>&nbsp;string or null</p>
-                </dd>
-              </dl>
-              <h3 id="special"><span class="symbol-name">special</span><span class="signature"><span class="signature-params">(name, val)</span>&nbsp;&rarr; <span class="signature-returns"> String</span></span></h3>
-              <p>Add a &quot;special&quot; variable to the request. For a subset of requests, this may be required. See table: https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .</p>
-              <section>
-                <h4>Parameters</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>name</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>val</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>String</code>&nbsp;added value</p>
-                </dd>
-              </dl>
-              <h3 id="subject"><span class="symbol-name">subject</span><span class="signature"><span class="signature-params">([sub])</span>&nbsp;&rarr; <span class="signature-returns"> (String or null)</span></span></h3>
-              <p>Get/set the subject of this request.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>sub</p>
-                      </td>
-                      <td>
-                        <p>String</p>
-                      </td>
-                      <td>
-                        <p>Yes</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>(String or null)</code>&nbsp;string or null</p>
-                </dd>
-              </dl>
-            </section>
-          </section>
-        </div>
-      </div>
-      <nav id="jsdoc-toc-nav" role="navigation"></nav>
-    </div>
-  </div>
-  <footer id="jsdoc-footer" class="jsdoc-footer">
-    <div id="jsdoc-footer-container">
-      <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.3.2 on July 28, 2015.
-      </p>
-    </div>
-  </footer>
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/jquery.cookie.js"></script>
-  <script src="scripts/tree.jquery.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <script src="scripts/jsdoc-toc.js"></script>
-  <script src="scripts/linenumber.js"></script>
-  <script src="scripts/scrollanchor.js"></script>
-</body>
+<body>
 
+<div id="main">
+
+    <h1 class="page-title">Class: request</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-minerva-requests.html">minerva-requests</a>~</span>request<span class="signature">(entity, operation)</span><span class="type-signature"> &rarr; {request}</span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="request"><span class="type-signature"></span>new request<span class="signature">(entity, operation)</span><span class="type-signature"> &rarr; {request}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Contructor for a Minerva request item. See table for
+operation/entity combinations:
+https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .
+
+Handle requests to Minerva in a somewhat structured way.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>entity</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string, see table</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string, see table</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    request object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">request</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="add_annotation"><span class="type-signature"></span>add_annotation<span class="signature">(key, vals, val_type<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add an annotation pair (or series of pairs) to the request.
+All annotations should be converted into strings for upstream consumption.
+You may also add the optional value-type argument.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vals</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">string or list of strings</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>val_type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">value-type to use, as string; defaults to nothing (an implied string, i.e. "xsd:string"), although not explicitly sent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line321">line 321</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number of annotations
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="add_set_class_expression"><span class="type-signature"></span>add_set_class_expression<span class="signature">(type, class_expr_list)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Intersections and unions.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">'intersection' or 'union'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>class_expr_list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a list of anything that can be taken by <class_expression> constructor</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line424">line 424</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number of expressions
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="add_svf_expression"><span class="type-signature"></span>add_svf_expression<span class="signature">(class_expr, property_id)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function: add_svf_expression
+
+Special use.
+A short form for "addition" requests that can overload the
+literal (on the server side) with Manchester syntax.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>class_expr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">class_expression</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">anything that can be taken by <class_expression> constructor</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>property_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string (id or...something more complicated?)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line403">line 403</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number of expressions
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="annotations"><span class="type-signature"></span>annotations<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Return list of annotations in request.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line365">line 365</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    (actual) list of request "values" pairs (or triples)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="class_expression"><span class="type-signature"></span>class_expression<span class="signature">(class_expr, property_id)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    General use for whatever.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>class_expr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">class_expression</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">anything that can be taken by <class_expression> constructor</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>property_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line379">line 379</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number of expressions
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="entity"><span class="type-signature"></span>entity<span class="signature">()</span><span class="type-signature"> &rarr; {String|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    The specified entity string.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="expressions"><span class="type-signature"></span>expressions<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Return list of expressions in request.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line443">line 443</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    (actual) list of request "expressions".
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="fact"><span class="type-signature"></span>fact<span class="signature">(sub, obj, pred)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add a fact to the request. The same as adding subject, object,
+and predicate all separately.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sub</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pred</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line301">line 301</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    n/a
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="individual"><span class="type-signature"></span>individual<span class="signature">(ind_id<span class="signature-attributes">opt</span>, force_id_p<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get/set the individual/instance in this request. If not set
+explicitly, will fall back to a default value.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ind_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">individual id we're going to refer to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>force_id_p</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">when an ID is supplied, in the case that the request is being used to create a *new individual* and the ID for it is already known, use ind_id as the IRI; defaults to not true</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line215">line 215</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="model"><span class="type-signature"></span>model<span class="signature">(model<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get/set the topic model of this request.
+
+If a model is not set, like during requests in a set to a
+not-yet-created model, Minerva will often add this itself if it
+can after the fact.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">a string id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line285">line 285</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="object"><span class="type-signature"></span>object<span class="signature">(obj<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get/set the object of this request. This will be used in
+fact/edge requests, but not much else.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">a string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line254">line 254</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="objectify"><span class="type-signature"></span>objectify<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Should only be used in the context of making a request set.
+
+Return a higher-level representation/"serialization" of the
+complete object.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line185">line 185</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    simple object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="predicate"><span class="type-signature"></span>predicate<span class="signature">(pred<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get/set the predicate of this request. This will be used in
+fact/edge requests, but not much else.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pred</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">a string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line268">line 268</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="special"><span class="type-signature"></span>special<span class="signature">(name, val)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add a "special" variable to the request. For a subset of
+requests, this may be required. See table:
+https://github.com/berkeleybop/bbopx-js/wiki/MinervaRequestAPI .
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>val</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line170">line 170</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    added value
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="subject"><span class="type-signature"></span>subject<span class="signature">(sub<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get/set the subject of this request.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sub</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="requests.js.html">requests.js</a>, <a href="requests.js.html#line240">line 240</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-minerva-requests.html">minerva-requests</a></li></ul><h3>Classes</h3><ul><li><a href="module-minerva-requests-request.html">request</a></li><li><a href="module-minerva-requests-request_set.html">request_set</a></li><li><a href="module-minerva-requests-request_variable.html">request_variable</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Sep 15 2018 16:56:16 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
 </html>
